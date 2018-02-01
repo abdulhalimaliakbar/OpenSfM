@@ -16,7 +16,7 @@ def mkdir_p(path):
         if exc.errno != errno.EEXIST or not os.path.isdir(path):
             raise
 
-print "Configuring..."
+# print "Configuring..."
 mkdir_p('cmake_build')
 subprocess.Popen(['cmake','../opensfm/src'], cwd='cmake_build').wait()
 
