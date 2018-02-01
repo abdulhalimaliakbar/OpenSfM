@@ -5,7 +5,7 @@ import json
 import pickle
 import gzip
 import numpy as np
-#import networkx as nx
+import networkx as nx
 import cv2
 
 from opensfm import io
@@ -516,18 +516,18 @@ class DataSet:
                 fin, self.load_reference_lla(), exif)
 
 
-#def load_tracks_graph(fileobj):
- #   g = nx.Graph()
-  #  for line in fileobj:
-   #     image, track, observation, x, y, R, G, B = line.split('\t')
-    #    g.add_node(image, bipartite=0)
-     #   g.add_node(track, bipartite=1)
-      #  g.add_edge(
-       #     image, track,
-        #    feature=(float(x), float(y)),
-         #   feature_id=int(observation),
-          #  feature_color=(float(R), float(G), float(B)))
-    #return g
+def load_tracks_graph(fileobj):
+    g = nx.Graph()
+    for line in fileobj:
+        image, track, observation, x, y, R, G, B = line.split('\t')
+        g.add_node(image, bipartite=0)
+        g.add_node(track, bipartite=1)
+        g.add_edge(
+            image, track,
+            feature=(float(x), float(y)),
+            feature_id=int(observation),
+            feature_color=(float(R), float(G), float(B)))
+    return g
 
 
 def save_tracks_graph(fileobj, graph):
